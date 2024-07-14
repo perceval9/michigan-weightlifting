@@ -1,9 +1,29 @@
-body, html, #root {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
+html, body, #root, .App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  background-color: var(--background1);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f1f1f1;
+}
 
 
  /* Define the fade-in animation */
@@ -19,9 +39,21 @@ body, html, #root {
   }
   
   /* Apply the fade-in animation to elements */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Move elements up slightly */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* Move elements back to original position */
+    }
+  }
+  
+  /* Apply the fade-in animation to elements */
   .fade-in {
     opacity: 0; /* Start with opacity 0 */
-    animation: fadeIn .7s ease-in forwards; /* Animation duration */
+    animation: fadeIn 0.7s ease-in forwards; /* Animation duration */
   }
   
   /* Delays for different elements */
@@ -75,51 +107,97 @@ html {
     margin-top: 1000px; /* Just for demonstration to have some space to scroll */
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
-
 header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start; /* Align items at the top */
+    align-items: center;
     background-color: #00274C;
-    opacity: 1; /* Ensure header opacity is 1 */
+    opacity: 1;
     width: 100%;
-    padding: 1.5em 1em;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 10px;
+    padding-right: 30px;
     position: sticky;
-    top: 0px;
-    height: auto;
+    height: 80px;
     box-sizing: border-box;
-    z-index: 10; /* Ensure header stays on top */
+    z-index: 10;
 }
 
-
 header img {
-    max-width: 20em;
+    height: 60px;
+    width: auto;
+    object-fit: contain;
 }
 
 nav {
-    padding: 0;
-    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
     display: flex;
     flex-direction: row;
     gap: 40px;
-    padding: 1.0em;
-    text-align: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nav-button {
+        text-decoration: none;
+        color: white;
+        font-family:'Plus Jakarta Sans', sans-serif;
+        font-weight: 600;
+        font-size: 1.2em;
+        transition: color 0.3s ease;
+    
+
 }
 .nav-button:hover {
-    color: var(--always-yellow); /* Add hover color */
+    color: var(--always-yellow);
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    height: 4px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+@media (max-width: 930px) {
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: #00274C;
+        opacity: .90;
+        gap: 20px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        transition: left 0.5s ease; 
+        padding: 20px;
+        padding-top: 20px;
+        padding-left: 50px;
+        z-index: 9; /* Make sure the navbar is behind the logo */
+    }
+
+    .nav-list.active {
+        left: 0;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        z-index: 10; /* Make sure the hamburger menu is in front of the navbar */
+    }
 }
 main {
     display: flex;
@@ -217,14 +295,43 @@ footer {
         margin-bottom: 20px;
         color: var(--text3);
     }
-    .sub-header {
-        text-align: center;
-        font-size: 3.5em;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 700;
-        color: var(--text1);
-    }
-
+    /* Base styles for .sub-header */
+/* Base styles for .sub-header */
+/* Base styles for .sub-header */
+.sub-header {
+    text-align: center;
+    font-size: 3.5em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--text1);
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Animate the line from the left for .sub-header */
+  .sub-header::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--text2);
+    transform: scaleX(0);
+    transform-origin: top left;
+    transition: transform 0.35s ease;
+  }
+  
+  /* Hover effect for .sub-header */
+  .sub-header:hover {
+    color: var(--text1); /* Optional: Change color on hover if needed */
+  }
+  
+  /* Add hover effect to trigger the animation */
+  .sub-header:hover::before {
+    transform: scaleX(1);
+  }
    #mw {
     color: var(--always-yellow);
     text-shadow: 1px 1px 1px var(--text1);
@@ -239,18 +346,22 @@ footer {
 
    .athletes-alumni {
     color: var(--text1);
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
     gap: 30px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.5em;
-    flex: 1;
-    align-items: flex-start;
     background-color: var(--background2); /* Lighter shade of grey */
-    width: 100vw; /* Ensure the section takes the full width */
     padding: 20px; /* Optional: Add some padding for better spacing */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    grid-template-columns: 1fr; /* Default to one column */
 }
+
+@media (min-width: 900px) {
+    .athletes-alumni {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for wider screens */
+    }
+} 
+
    .athletes-info, .alumni-info {
     font-family:sans-serif;
     font-weight: 200;
@@ -258,14 +369,20 @@ footer {
     font-size: .8em;
     line-height: 1.5em;
     color: var(--text3);
+    text-align: center;
    }
 
+   #ourAthletes, #ourAlumni{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+   }
     #ourAthletes > ul > li {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 200;
     font-size: .9em;
     color: var(--text3);
-    text-align: leading;
+    text-align: center;
 
    }
 
@@ -274,12 +391,11 @@ footer {
     font-weight: 200;
     font-size: .9em;
     color: var(--text3);
-    text-align: leading;
+    text-align: center;
 
    }
 
-#ourAthletesSection {
-    padding-left: 20px;
+#ourAthletesSection, #ourAlumniSection {
     min-width: 400px;
     max-width: 1300px;
     display: flex;
@@ -290,6 +406,8 @@ footer {
 
 
    #ourAthletesSection > p, li {
+    margin-left: 100px;
+    margin-right: 100px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 400;
     font-size: 1.2em;
@@ -297,6 +415,15 @@ footer {
     text-align: leading;
    }
 
+   #ourAlumniSection > p, li {
+    margin-left: 100px;
+    margin-right: 100px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: var(--text3);
+    text-align: leading;
+   }
    ul {
     list-style-type: none; /* Remove bullet points */
     padding-left: 0; /* Remove default padding */
@@ -315,10 +442,65 @@ footer {
 }
 
 .sponsors-section {
+    text-align: center;
+  }
+  
+  .sponsors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .sponsor-container {
+    position: relative;
+    margin: 20px;
+  }
+  
+  .sponsor-container a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .sponsor-img {
+    position: relative;
+    width: 300px; /* Adjust size as needed */
+    height: 200px;
+    object-fit: cover;
+    opacity: .6;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+  }
+  
+  .sponsor-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
+    opacity: 1;
+    
+    transition: opacity 0.3s ease;
+  }
+  
+  .sponsor-info img {
+    max-width: 150px; /* Adjust size as needed */
+    margin-bottom: 10px; /* Add some spacing between logo and text */
+  }
+  
+  .sponsor-container:hover .sponsor-img {
+    opacity: 0.6;
+    transform: scale(1.1); /* Expand the card */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sponsor-container:hover .sponsor-info {
+    opacity: 1;
+  }
 
 .year {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -442,6 +624,11 @@ button {
     width: 150px;
 }
 
+  
+  .learn-more:hover {
+    background-color: var(--always-yellow); /* Change to yellow on hover */
+}
+
 textarea {
     background-color: var(--background1); /* Light grey background */
     border: 1.5px solid grey; /* Consistent grey border */
@@ -461,65 +648,63 @@ textarea {
     grid-column: span 2; /* Span two columns */
 }
 
-.bluebox {
-    align-self: center;
-    background-color: #00274C;
-    color: white;
-    min-width: 800px;
-    max-width: 1200px;
+.container {
     text-align: center;
-    border-radius: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-}  
-
-.standing {
+  }
+  
+  .sub-header {
+    text-align: center;
+    font-size: 3.5em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--text1);
+  }
+  
+  .standing {
     font-size: 2.0em;
+    padding-bottom: 40px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
     color: var(--text1);
     margin-bottom: 20px;
     text-align: center;
-    align-items: left;
-}
-
-.athlete-grid {
-    display: grid;
-    grid-template-columns: 200px 100px 400px;
-    grid-template-rows: 1fr 1fr 1fr;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    
-}
-
-.athlete-grid img {
-    grid-area: 1 / 1 / 4 / 1;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    padding-bottom: 30px;
-}
- .athlete-info {
-    grid-area: 2 / 2 / 4 / 4;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    text-align: left;
-    padding-left: 40px;
-}
-
-.athlete-container {
+  }
+  
+  .athlete-group {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
-    margin: 20px;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .athlete-card {
+    background-color: var(--background2);
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    padding: 40px;
+    text-align: center;
+    height: 350px; /* Ensure cards have a consistent height */
+    width: 250px; /* Ensure cards have a consistent width */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  .athlete-card:hover {
+    transform: scale(1.1); /* Expand the card */
+    box-shadow: 0 0 15px var(--background2); /* Enhance the shadow for a pop effect */
+  }
+  
+  .athlete-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+  
+  .athlete-info {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-top: 10px;
+    color: var(--text1);
+  }
 
 #pics {
     display: grid;
@@ -575,14 +760,7 @@ textarea {
     margin-top: 10px;
 }
 
-.label {
-    text-decoration: none;
-    color: white;
-    font-family:'Plus Jakarta Sans', sans-serif;
-    font-weight: 500;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
-}
+
 
 .drop-content {
     text-align: center;

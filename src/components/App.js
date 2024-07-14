@@ -5,18 +5,23 @@ import Main from './Main';
 import Footer from './Footer';
 import Connect from './Connect';
 import OurAthletes from './OurAthletes';
-import '../App.css';
+import Sponsors from './Sponsors';
+import OurAlumni from './OurAlumni';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/Connect" element={<Connect />} />
-          <Route path="/OurAthletes" element={<OurAthletes />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/connect" element={<Connect />} />
+            <Route path="/ourathletes" element={<OurAthletes />} />
+            <Route path="/sponsors" element={<Sponsors />} />
+            <Route path="/ouralumni" element={<OurAlumni />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
