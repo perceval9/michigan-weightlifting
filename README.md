@@ -1,4 +1,4 @@
-sorry if this is shitty XD
+tell me if there are any bugs
 
 # Getting Started with Create React App
 
