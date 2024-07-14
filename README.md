@@ -1,4 +1,4 @@
-tell me if there are any bugs
+tell me if there are any bugs. 
 also i don't think i was supposed to put all the css into one file sorry
 
 # Getting Started with Create React App
