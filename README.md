@@ -1,4 +1,6 @@
-# Michigan Weightlifting Website
+# University of Michigan Weightlifting Website
+
+![Website Image](./description.png)
 
 ## Project Overview
 
