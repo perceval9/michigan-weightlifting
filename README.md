@@ -26,6 +26,12 @@ First, clone the repository to your local machine and navigate to the project di
 ```bash
 git clone https://github.com/your-username/weightlifting-website.git
 cd weightlifting-website
-**### 2. Install dependencies**
-
-**###3. Start the development server**
+```
+### 2. Install dependencies
+```
+npm install
+```
+### 3. Start the development server
+```
+npm start
+```
