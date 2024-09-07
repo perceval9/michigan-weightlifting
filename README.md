@@ -1,4 +1,5 @@
 # University of Michigan Weightlifting Website
+This website was created by Perceval J. Park on July 30, 2024.
 
 ![Website Image](./description.png)
 
